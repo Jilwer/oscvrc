@@ -15,7 +15,7 @@ const (
 
 // Initiates an OSC client
 // Default address is localhost (127.0.0.1), Default port is 9000
-func newOscClient(addr string, port int) localOscClient {
+func NewOscClient(addr string, port int) localOscClient {
 	oscClient := osc.NewClient(addr, port)
 	return localOscClient{oscClient}
 }
