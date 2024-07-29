@@ -59,3 +59,5 @@ func (c *localOscClient) Jump() error {
 
 	return nil
 }
+
+// TODO: Items, PanicButton, QuickMenu, and Voice

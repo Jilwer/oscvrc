@@ -1,21 +1,19 @@
 package vrcinput
 
-//TODO: Add the rest of the functions
+type AxesMoveDirection string
 
-// /input/Vertical
+const (
+	AxisVertical   AxesMoveDirection = "Vertical"
+	AxisHorizontal AxesMoveDirection = "Horizontal"
+)
 
-// /input/Horizontal
+// func (c *localOscClient) Axes(direction AxesDirection, b bool) error {
 
-// /input/LookHorizontal
-// /input/UseAxisRight 
+type AxesLookDirection string
 
-// /input/GrabAxisRight 
+const (
+	AxisLookLeft  AxesLookDirection = "LookHorizontal"
+	AxisLookRight AxesLookDirection = "LookVertical"
+)
 
-// /input/MoveHoldFB
-
-// /input/SpinHoldCwCcw
-
-// /input/SpinHoldUD
-
-// /input/SpinHoldLR
-
+// func (c *localOscClient) Axes(direction AxesDirection, b bool) error {
