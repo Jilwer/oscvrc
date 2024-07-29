@@ -109,6 +109,7 @@ const (
 // DropHand drops the item in the hand of the specified side.
 // It takes a DropHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the drop hand action.
+// VR Only.
 func (c *localOscClient) DropHand(hand DropHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
@@ -128,6 +129,7 @@ const (
 // UseHand uses the item in the hand of the specified side.
 // It takes a UseHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the use hand action.
+// VR Only.
 func (c *localOscClient) UseHand(hand UseHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
@@ -147,6 +149,7 @@ const (
 // GrabHand grabs the item in the hand of the specified side.
 // It takes a GrabHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the grab hand action.
+// VR Only.
 func (c *localOscClient) GrabHand(hand GrabHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
