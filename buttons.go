@@ -10,7 +10,7 @@ import (
 // Buttons expect an int of 1 for 'pressed' and 0 for 'released'.
 // They will not function correctly without resetting to 0 first - sending /input/Jump 1 and then /input/Jump 1 will only result in a single jump.
 
-// Number arguments require a 32 bit types (f32, int32, bool)
+// Number arguments require 32 bit types (f32, int32, bool)
 
 type MoveDirection string
 
