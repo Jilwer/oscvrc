@@ -10,12 +10,10 @@ import (
 type MoveDirection string
 
 const (
-	MoveForward    MoveDirection = "MoveForward"
-	MoveBackward   MoveDirection = "MoveBackward"
-	MoveLeft       MoveDirection = "MoveLeft"
-	MoveRight      MoveDirection = "MoveRight"
-	MoveVertical   MoveDirection = "Vertical"
-	MoveHorizontal MoveDirection = "Horizontal"
+	MoveForward  MoveDirection = "MoveForward"
+	MoveBackward MoveDirection = "MoveBackward"
+	MoveLeft     MoveDirection = "MoveLeft"
+	MoveRight    MoveDirection = "MoveRight"
 )
 
 func (c *localOscClient) Move(direction MoveDirection, b bool) error {
