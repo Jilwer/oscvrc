@@ -4,7 +4,7 @@ import (
 	"github.com/hypebeast/go-osc/osc"
 )
 
-type localOscClient struct {
+type Client struct {
 	*osc.Client
 }
 
@@ -15,7 +15,7 @@ const (
 
 // Initiates an OSC client
 // Default address is localhost (127.0.0.1), Default port is 9000
-func NewOscClient(addr string, port int) localOscClient {
+func NewOscClient(addr string, port int) Client {
 	oscClient := osc.NewClient(addr, port)
-	return localOscClient{oscClient}
+	return Client{oscClient}
 }

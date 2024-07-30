@@ -7,7 +7,7 @@ const (
 	AxisHorizontal AxesMoveDirection = "Horizontal"
 )
 
-// func (c *localOscClient) AxesMove(direction AxesDirection, b bool) error {
+// func (c *Client) AxesMove(direction AxesDirection, b bool) error {
 
 type AxesLookDirection string
 
@@ -16,4 +16,4 @@ const (
 	AxisLookRight AxesLookDirection = "LookVertical"
 )
 
-// func (c *localOscClient) AxesLook(direction AxesDirection, b bool) error {
+// func (c *Client) AxesLook(direction AxesDirection, b bool) error {

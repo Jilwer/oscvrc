@@ -25,7 +25,7 @@ const (
 // It takes a MoveDirection and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the move direction.
 // It returns an error if there was a problem sending the message.
-func (c *localOscClient) Move(direction MoveDirection, b bool) error {
+func (c *Client) Move(direction MoveDirection, b bool) error {
 	message := osc.NewMessage("/input/"+string(direction), b)
 	err := c.Send(message)
 	if err != nil {
@@ -45,7 +45,7 @@ const (
 // It takes a LookDirection and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the look direction.
 // It returns an error if there was a problem sending the message.
-func (c *localOscClient) Look(direction LookDirection, b bool) error {
+func (c *Client) Look(direction LookDirection, b bool) error {
 	message := osc.NewMessage("/input/"+string(direction), b)
 	err := c.Send(message)
 	if err != nil {
@@ -55,7 +55,7 @@ func (c *localOscClient) Look(direction LookDirection, b bool) error {
 }
 
 // Jump if the world supports it.
-func (c *localOscClient) Jump() error {
+func (c *Client) Jump() error {
 	var jumping bool
 	for i := 0; i < 2; i++ {
 		jumping = !jumping
@@ -73,7 +73,7 @@ func (c *localOscClient) Jump() error {
 }
 
 // Run if the world supports it.
-func (c *localOscClient) Run(b bool) error {
+func (c *Client) Run(b bool) error {
 	message := osc.NewMessage("/input/Run", b)
 	err := c.Send(message)
 	if err != nil {
@@ -90,7 +90,7 @@ const (
 )
 
 // ComfortLook works the same as Look, but for comfort turning using snap turns. VR Only.
-func (c *localOscClient) ComfortLook(direction ComfortLookDirection, b bool) error {
+func (c *Client) ComfortLook(direction ComfortLookDirection, b bool) error {
 	message := osc.NewMessage("/input/"+string(direction), b)
 	err := c.Send(message)
 	if err != nil {
@@ -110,7 +110,7 @@ const (
 // It takes a DropHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the drop hand action.
 // VR Only.
-func (c *localOscClient) DropHand(hand DropHand, b bool) error {
+func (c *Client) DropHand(hand DropHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
 	if err != nil {
@@ -130,7 +130,7 @@ const (
 // It takes a UseHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the use hand action.
 // VR Only.
-func (c *localOscClient) UseHand(hand UseHand, b bool) error {
+func (c *Client) UseHand(hand UseHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
 	if err != nil {
@@ -150,7 +150,7 @@ const (
 // It takes a GrabHand and a boolean value as parameters.
 // The boolean value indicates whether to enable or disable the grab hand action.
 // VR Only.
-func (c *localOscClient) GrabHand(hand GrabHand, b bool) error {
+func (c *Client) GrabHand(hand GrabHand, b bool) error {
 	message := osc.NewMessage("/input/"+string(hand), b)
 	err := c.Send(message)
 	if err != nil {
@@ -159,8 +159,8 @@ func (c *localOscClient) GrabHand(hand GrabHand, b bool) error {
 	return nil
 }
 
-// Turn off and on Safe Mode. 
-func (c *localOscClient) PanicButton(b bool) error {
+// Turn off and on Safe Mode.
+func (c *Client) PanicButton(b bool) error {
 	message := osc.NewMessage("/input/PanicButton", b)
 	err := c.Send(message)
 	if err != nil {

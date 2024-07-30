@@ -10,7 +10,7 @@ import (
 // If b is True, send the text in s immediately, bypassing the keyboard.
 // If b is False, open the keyboard and populate it with the provided text.
 // n is an additional bool parameter that when set to False will not trigger the notification SFX (defaults to True if not specified).
-func (c *localOscClient) Chat(s string, b, n bool) error {
+func (c *Client) Chat(s string, b, n bool) error {
 	if len(s) > 144 {
 		return errors.New("message is too long")
 	}
