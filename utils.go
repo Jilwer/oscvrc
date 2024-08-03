@@ -21,7 +21,7 @@ func (c *Client) SendMessage(address string, value ...interface{}) error {
 		}
 	}
 
-	message := osc.NewMessage(address, value)
+	message := osc.NewMessage(address, value...)
 	err := c.Send(message)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
