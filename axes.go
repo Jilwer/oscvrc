@@ -1,4 +1,4 @@
-package vrcosc
+package oscvrc
 
 type AxesMoveDirection string
 
