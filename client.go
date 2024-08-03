@@ -1,4 +1,4 @@
-package vrcinput
+package vrcosc
 
 import (
 	"github.com/hypebeast/go-osc/osc"

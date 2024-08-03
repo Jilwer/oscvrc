@@ -1,4 +1,4 @@
-package vrcinput
+package vrcosc
 
 type AxesMoveDirection string
 
