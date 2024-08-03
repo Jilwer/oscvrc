@@ -1,4 +1,4 @@
-package vrcosc
+package oscvrc
 
 import (
 	"github.com/hypebeast/go-osc/osc"
