@@ -3,8 +3,6 @@ package vrcosc
 import (
 	"errors"
 	"time"
-
-	"github.com/hypebeast/go-osc/osc"
 )
 
 // Buttons expect an int of 1 for 'pressed' and 0 for 'released'.
@@ -26,11 +24,13 @@ const (
 // The boolean value indicates whether to enable or disable the move direction.
 // It returns an error if there was a problem sending the message.
 func (c *Client) Move(direction MoveDirection, b bool) error {
-	message := osc.NewMessage("/input/"+string(direction), b)
-	err := c.Send(message)
+	var address = "/input/" + string(direction)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
@@ -46,21 +46,25 @@ const (
 // The boolean value indicates whether to enable or disable the look direction.
 // It returns an error if there was a problem sending the message.
 func (c *Client) Look(direction LookDirection, b bool) error {
-	message := osc.NewMessage("/input/"+string(direction), b)
-	err := c.Send(message)
+	var address = "/input/" + string(direction)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
 // Jump if the world supports it.
 func (c *Client) Jump() error {
 	var jumping bool
+	const address = "/input/Jump"
+
+	// Jumping should always return to 0
 	for i := 0; i < 2; i++ {
 		jumping = !jumping
-		message := osc.NewMessage("/input/Jump", jumping)
-		err := c.Send(message)
+		err := c.SendMessage(address, jumping)
 		if err != nil {
 			return errors.New("failed to send message: " + err.Error())
 		}
@@ -74,11 +78,13 @@ func (c *Client) Jump() error {
 
 // Run if the world supports it.
 func (c *Client) Run(b bool) error {
-	message := osc.NewMessage("/input/Run", b)
-	err := c.Send(message)
+	const address = "/input/Run"
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
@@ -91,11 +97,13 @@ const (
 
 // ComfortLook works the same as Look, but for comfort turning using snap turns. VR Only.
 func (c *Client) ComfortLook(direction ComfortLookDirection, b bool) error {
-	message := osc.NewMessage("/input/"+string(direction), b)
-	err := c.Send(message)
+	var address = "/input/" + string(direction)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
@@ -111,11 +119,13 @@ const (
 // The boolean value indicates whether to enable or disable the drop hand action.
 // VR Only.
 func (c *Client) DropHand(hand DropHand, b bool) error {
-	message := osc.NewMessage("/input/"+string(hand), b)
-	err := c.Send(message)
+	var address = "/input/" + string(hand)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
@@ -131,11 +141,13 @@ const (
 // The boolean value indicates whether to enable or disable the use hand action.
 // VR Only.
 func (c *Client) UseHand(hand UseHand, b bool) error {
-	message := osc.NewMessage("/input/"+string(hand), b)
-	err := c.Send(message)
+	var address = "/input/" + string(hand)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
@@ -151,21 +163,25 @@ const (
 // The boolean value indicates whether to enable or disable the grab hand action.
 // VR Only.
 func (c *Client) GrabHand(hand GrabHand, b bool) error {
-	message := osc.NewMessage("/input/"+string(hand), b)
-	err := c.Send(message)
+	var address = "/input/" + string(hand)
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 
 // Turn off and on Safe Mode.
 func (c *Client) PanicButton(b bool) error {
-	message := osc.NewMessage("/input/PanicButton", b)
-	err := c.Send(message)
+	const address = "/input/PanicButton"
+
+	err := c.SendMessage(address, b)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
 

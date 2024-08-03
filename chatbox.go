@@ -2,8 +2,6 @@ package vrcosc
 
 import (
 	"errors"
-
-	"github.com/hypebeast/go-osc/osc"
 )
 
 // Chat is a function that sends a message into the VRChat text chat.
@@ -11,13 +9,15 @@ import (
 // If b is False, open the keyboard and populate it with the provided text.
 // n is an additional bool parameter that when set to False will not trigger the notification SFX (defaults to True if not specified).
 func (c *Client) Chat(s string, b, n bool) error {
+	const address = "/chatbox/input"
 	if len(s) > 144 {
 		return errors.New("message is too long")
 	}
-	message := osc.NewMessage("/chatbox/input", s, b, n)
-	err := c.Send(message)
+
+	err := c.SendMessage(address, s, b, n)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
 	}
+
 	return nil
 }
