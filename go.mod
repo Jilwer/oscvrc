@@ -1,4 +1,4 @@
-module github.com/Jilwer/VRChatOscGO
+module github.com/Jilwer/oscvrc
 
 go 1.22.5
 

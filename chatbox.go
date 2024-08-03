@@ -1,5 +1,4 @@
-package vrcosc
-
+package oscvrc
 import (
 	"errors"
 )
