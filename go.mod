@@ -1,4 +1,4 @@
-module github.com/Jilwer/VRChatOscInput
+module github.com/Jilwer/VRChatOscGO
 
 go 1.22.5
 
