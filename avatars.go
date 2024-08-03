@@ -25,6 +25,7 @@ type ParameterConfig struct {
 type InputConfig struct {
 	Address string `json:"address"`
 	Type    string `json:"type"`
+	client  *Client
 }
 
 type OutputConfig struct {
@@ -32,7 +33,13 @@ type OutputConfig struct {
 	Type    string `json:"type"`
 }
 
-func ReadAvatarParamConfig(avatarId, userId string) (AvatarParamConfig, error) {
+func (ic *InputConfig) setInputClient(c *Client) {
+	ic.client = c
+}
+
+// ReadAvatarParamConfig reads the avatar parameter configuration from the specified file.
+// The returned struct should be used in conjunction with the client.SendMessage function
+func (c *Client) ReadAvatarParamConfig(avatarId, userId string) (AvatarParamConfig, error) {
 
 	var path string
 
@@ -63,5 +70,22 @@ func ReadAvatarParamConfig(avatarId, userId string) (AvatarParamConfig, error) {
 		return AvatarParamConfig{}, fmt.Errorf("failed to unmarshal json: %w", err)
 	}
 
+	for i := range avatarParamConfig.Parameters {
+		avatarParamConfig.Parameters[i].Input.setInputClient(c)
+	}
+
 	return avatarParamConfig, nil
+}
+
+func (i *InputConfig) Send(value ...interface{}) error {
+	if i.client == nil {
+		return errors.New("client not set")
+	}
+
+	err := i.client.SendMessage(i.Address, value...)
+	if err != nil {
+		return fmt.Errorf("failed to send message: %w", err)
+	}
+
+	return nil
 }

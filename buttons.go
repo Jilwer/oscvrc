@@ -186,3 +186,6 @@ func (c *Client) PanicButton(b bool) error {
 }
 
 // TODO: Voice, Quick Menu
+func (c *Client) Voice() error {
+	return nil
+}
