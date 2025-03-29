@@ -50,13 +50,20 @@ func (c *Client) ReadAvatarParamConfig(avatarId, userId string, path string) (Av
 	}
 
 	if path == "" {
-		// If no path is provided, construct the path based on the operating system
-		// Note: This will default to the standard VRChat path for each OS
 		switch runtime.GOOS {
 		case "windows":
 			path = fmt.Sprintf(`%s\AppData\LocalLow\VRChat\VRChat\OSC\%s\Avatars\%s.json`, user.HomeDir, userId, avatarId)
 		case "linux":
 			path = fmt.Sprintf(`%s/.local/share/Steam/steamapps/compatdata/438100/pfx/drive_c/users/steamuser/AppData/LocalLow/VRChat/VRChat/OSC/%s/Avatars/%s.json`, user.HomeDir, userId, avatarId)
+		default:
+			return AvatarParamConfig{}, errors.New("unsupported operating system or unknown path")
+		}
+	} else {
+		switch runtime.GOOS {
+		case "windows":
+			path = fmt.Sprintf(`%s\%s\Avatars\%s.json`, path, userId, avatarId)
+		case "linux":
+			path = fmt.Sprintf(`%s/%s/Avatars/%s.json`, path, userId, avatarId)
 		default:
 			return AvatarParamConfig{}, errors.New("unsupported operating system or unknown path")
 		}
