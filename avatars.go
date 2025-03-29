@@ -39,9 +39,9 @@ func (ic *InputConfig) setInputClient(c *Client) {
 
 // ReadAvatarParamConfig reads the avatar parameter configuration from the specified file.
 // The returned struct should be used in conjunction with the client.SendMessage function
-// to send messages to the VRChat avatar parameters. The `path` can be specified to read
-// from a custom location. If `path` is empty, it will default to the standard VRChat
-// path based on the operating system.
+// to send messages to the VRChat avatar parameters. 
+//The `path` can be specified to read from a custom location. If `path` is empty, it will default to the standard VRChat
+// path based on the operating system. It should point to ~/AppData/LocalLow/VRChat/VRChat/OSC/ 
 func (c *Client) ReadAvatarParamConfig(avatarId, userId string, path string) (AvatarParamConfig, error) {
 
 	user, err := user.Current()
