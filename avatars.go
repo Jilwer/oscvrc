@@ -39,22 +39,27 @@ func (ic *InputConfig) setInputClient(c *Client) {
 
 // ReadAvatarParamConfig reads the avatar parameter configuration from the specified file.
 // The returned struct should be used in conjunction with the client.SendMessage function
-func (c *Client) ReadAvatarParamConfig(avatarId, userId string) (AvatarParamConfig, error) {
-
-	var path string
+// to send messages to the VRChat avatar parameters. The `path` can be specified to read
+// from a custom location. If `path` is empty, it will default to the standard VRChat
+// path based on the operating system.
+func (c *Client) ReadAvatarParamConfig(avatarId, userId string, path string) (AvatarParamConfig, error) {
 
 	user, err := user.Current()
 	if err != nil {
 		return AvatarParamConfig{}, fmt.Errorf("failed to get current user: %w", err)
 	}
 
-	switch runtime.GOOS {
-	case "windows":
-		path = fmt.Sprintf(`%s\AppData\LocalLow\VRChat\VRChat\OSC\%s\Avatars\%s.json`, user.HomeDir, userId, avatarId)
-	case "linux":
-		path = fmt.Sprintf(`%s/.local/share/Steam/steamapps/compatdata/438100/pfx/drive_c/users/steamuser/AppData/LocalLow/VRChat/VRChat/OSC/%s/Avatars/%s.json`, user.HomeDir, userId, avatarId)
-	default:
-		return AvatarParamConfig{}, errors.New("unsupported operating system")
+	if path == "" {
+		// If no path is provided, construct the path based on the operating system
+		// Note: This will default to the standard VRChat path for each OS
+		switch runtime.GOOS {
+		case "windows":
+			path = fmt.Sprintf(`%s\AppData\LocalLow\VRChat\VRChat\OSC\%s\Avatars\%s.json`, user.HomeDir, userId, avatarId)
+		case "linux":
+			path = fmt.Sprintf(`%s/.local/share/Steam/steamapps/compatdata/438100/pfx/drive_c/users/steamuser/AppData/LocalLow/VRChat/VRChat/OSC/%s/Avatars/%s.json`, user.HomeDir, userId, avatarId)
+		default:
+			return AvatarParamConfig{}, errors.New("unsupported operating system or unknown path")
+		}
 	}
 
 	data, err := os.ReadFile(path)
